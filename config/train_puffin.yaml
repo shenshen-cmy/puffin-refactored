@@ -1,0 +1,38 @@
+# train_puffin.yaml
+data:
+  # Use relative paths, code will automatically convert to absolute paths
+  train_tsv: "example_puffin_data/training_data.tsv"
+  val_tsv: "data/val_data.tsv"  # Optional, can be omitted for auto-splitting
+
+  # Sequence processing parameters
+  sequence_length: 650
+  overlap: 325
+
+model:
+  motif_kernel_size: 51
+  initiator_kernel_size: 15
+  trinucleotide_kernel_size: 3
+  motif_effect_range: 601
+  initiator_effect_range: 15
+  trinucleotide_effect_range: 601
+  num_motifs: 10
+  num_initiators: 20
+  num_trinucleotides: 64
+  target_method: "FANTOM_CAGE"
+  use_cuda: true
+
+training:
+  batch_size: 32
+  learning_rate: 0.001
+  num_epochs: 20
+  validation_freq: 2
+  save_freq: 5
+  early_stopping_patience: 20
+  num_workers: 0
+  auxiliary_weight: 0.001
+
+paths:
+  # Use relative paths, code will automatically create directories
+  model_dir: "models/saved"
+  log_dir: "logs"
+  output_dir: "outputs"

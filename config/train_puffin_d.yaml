@@ -1,0 +1,28 @@
+# train_puffin_d.yaml
+# Puffin_D model training configuration
+data:
+  train_tsv: "example_puffin_d_data/training_data.tsv"  # Use relative path
+  val_tsv: ""  # Optional, can be omitted for auto-splitting
+
+  # Puffin_D uses long sequences
+  sequence_length: 100000    # 100kb sequences
+  overlap: 50000             # 50% overlap
+
+model:
+  use_cuda: true
+  target_method: "FANTOM_CAGE"
+
+training:
+  batch_size: 4              # Small batch size due to long sequences
+  learning_rate: 0.0001
+  num_epochs: 50
+  validation_freq: 5
+  save_freq: 10
+  early_stopping_patience: 15
+  num_workers: 2
+  weight_decay: 0.00001      # Regularization
+
+paths:
+  model_dir: "models/saved"
+  log_dir: "logs"
+  output_dir: "outputs"
